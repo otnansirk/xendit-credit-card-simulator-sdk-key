@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xendit Component Simulation</title>
+</head>
+<body>
+    <div style="max-width: 500px; margin: 0 auto; padding: 20px;">
+        <h3>1. Enter SDK Key</h3>
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="sdk-key-input" placeholder="Paste components_sdk_key here..." style="width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box;">
+            <button id="load-sdk-button" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Initialize SDK</button>
+        </div>
+
+        <div id="payment-section" style="display: none;">
+            <h3>2. Select Payment Method</h3>
+            <div id="payment-container" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;"></div>
+            <button id="pay-button" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Pay Now</button>
+        </div>
+    </div>
+
+    <!-- Vite handles the module import -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
