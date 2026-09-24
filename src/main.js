@@ -26,10 +26,9 @@ document.getElementById("load-sdk-button").addEventListener("click", () => {
       const channels = components.getActiveChannels();
 
       if (channels && channels.length > 0) {
-        channels.forEach(channel => {
-          const element = components.createChannelPickerComponent(channel);
-          container.appendChild(element);
-        });
+        // Just create one unified picker
+        const element = components.createChannelPickerComponent();
+        container.appendChild(element);
         document.getElementById("payment-section").style.display = "block";
       } else {
         container.innerHTML = "<p>No active payment channels available.</p>";
@@ -59,11 +58,20 @@ document.getElementById("pay-button").addEventListener("click", () => {
     return;
   }
 
-  components.submit().then(result => {
-      console.log('Transaction Result:', result);
-      alert(`Transaction ${result.status}: ${result.transactionId}`);
-  }).catch(error => {
-      console.error('Submission error:', error);
-      alert('Error submitting transaction');
-  });
+  // Set up success listener if not already done
+  if (!window.sessionCompleteAttached) {
+    components.addEventListener("session-complete", (event) => {
+      console.log('Transaction Result:', event);
+      alert('Transaction Successful!');
+      window.location.href = '/success.html';
+    });
+    window.sessionCompleteAttached = true;
+  }
+
+  try {
+    components.submit();
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('Error submitting transaction');
+  }
 });
