@@ -3,8 +3,9 @@ import { XenditComponents } from "xendit-components-web";
 let components = null;
 
 document.getElementById("load-sdk-button").addEventListener("click", () => {
-  const sdkKeyInput = document.getElementById("sdk-key-input").value.trim();
-  
+  let sdkKeyInput = document.getElementById("sdk-key-input").value.trim();
+  sdkKeyInput = sdkKeyInput.replace(/^"|"$/g, ''); // Remove accidental surrounding quotes
+
   if (!sdkKeyInput) {
     alert("Please enter a valid components_sdk_key");
     return;
